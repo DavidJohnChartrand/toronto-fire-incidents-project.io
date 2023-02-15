@@ -26,7 +26,8 @@ Null hypothesis: There is no correlation between the time it takes to put out a 
 	- Correlate with distance from hydrant
 	- Arrival time of fire truck
 
-## Data Alterc
+## Data Alterations
+
 
 ## Authors
 This data has been collected, aggregated, and visualised by Yonghao Liu, Youssouf Ismael Youssouf, and David Chartrand.
