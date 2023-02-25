@@ -18,9 +18,7 @@ d3.json(fireData).then(function (incidents_data) {
   console.log(incidents_data.features[0]);
 });
 
-
-
-d3.json(fireData).then(function (incidents_data) {
+function CreateHeatMap(incidents_data){
   var heatArray = [];
 
 
@@ -40,55 +38,73 @@ d3.json(fireData).then(function (incidents_data) {
     radius: 20,
     blur: 35
   }).addTo(myMap);
+}
 
-});
+
+// d3.json(fireIncidentUrl).then(function (incidents_data) {
+//   CreateHeatMap(incidents_data)
+// });
 
 
 
 // Load the GeoJSON data.
 var fireData = "static/data/Fire_Incidents_Data.geojson";
 
-d3.json(fireData).then(function (incidents_data) {
+// Load URL
+var fireIncidentUrl = "http://127.0.0.1:5000/fire_incidents"
 
+d3.json(fireIncidentUrl).then(function (incidents_data) {
+  CreateHeatMap(incidents_data)
+});
 
+function CreateTimeLine(incidents_data) {
   incidents_data.features.forEach((feat, idx, arr)=>{
 
-      var lat = feat.geometry.coordinates[1]
-      feat.geometry.coordinates[1] = feat.geometry.coordinates[0];
-      feat.geometry.coordinates[0]=lat
+    var lat = feat.geometry.coordinates[1]
+    feat.geometry.coordinates[1] = feat.geometry.coordinates[0];
+    feat.geometry.coordinates[0]=lat
 
-      //if the dates are fucked, remove data 
-    if(!feat.properties.TFS_Arrival_Time || !feat.properties.Fire_Under_Control_Time){
-      arr.splice(idx,1);//removes the whole ass object
-    }
-  });
-  var timelineControl = L.timelineSliderControl({
-    formatOutput: function (date) {
-      return new Date(date).toLocaleDateString();
-    }
-  });
-
-  var events = incidents_data
-
-  var timelineLayer = L.timeline(events, {
-    getInterval: function (event) {
-       return {
-          start: new Date(event.properties.TFS_Arrival_Time),
-          end: addDays(new Date(event.properties.Fire_Under_Control_Time), 1)
-        };
-    },
-    pointToLayer: function (event, latlng) {
-      return L.circleMarker(latlng, null);
-     }
-  });
-
-  timelineLayer.addTo(myMap);
-  timelineControl.addTo(myMap);
-  timelineControl.addTimelines(timelineLayer);
+    //if the dates are fucked, remove data 
+  if(!feat.properties.TFS_Arrival_Time || !feat.properties.Fire_Under_Control_Time){
+    arr.splice(idx,1);//removes the whole ass object
+  }
 });
+var timelineControl = L.timelineSliderControl({
+  formatOutput: function (date) {
+    return new Date(date).toLocaleDateString();
+  }
+});
+
+var events = incidents_data
+
+var timelineLayer = L.timeline(events, {
+  getInterval: function (event) {
+     return {
+        start: new Date(event.properties.TFS_Arrival_Time),
+        end: addDays(new Date(event.properties.Fire_Under_Control_Time), 1)
+      };
+  },
+  pointToLayer: function (event, latlng) {
+    return L.circleMarker(latlng, null);
+   }
+});
+
+timelineLayer.addTo(myMap);
+timelineControl.addTo(myMap);
+timelineControl.addTimelines(timelineLayer);
+}
+
+// d3.json(fireData).then(function (incidents_data) {
+//   CreateTimeLine(incidents_data)
+//   });
 
 
 addDays = (date, days) => {
   date = date.setDate(date.getDate()+days);
   return date;
 }
+
+d3.json(fireIncidentUrl).then(function (incidents_data) {
+  console.log(incidents_data.features)
+  CreateTimeLine(incidents_data)
+});

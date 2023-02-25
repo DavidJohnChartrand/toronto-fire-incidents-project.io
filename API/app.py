@@ -1,5 +1,18 @@
-from flask import Flask
+from flask import Flask,jsonify, json
 from pymongo import MongoClient
+from bson import json_util
+
+# The following code is run in the command line to convert GeoJSON to a format that is readable for MongoDB
+
+#Download jq (it's sed-like program but for JSON)
+# Then run:
+# jq --compact-output ".features" input.geojson > output.geojson
+# then
+# mongoimport --db dbname -c collectionname --file "output.geojson" --jsonArray
+
+
+def parse_json(data):
+    return json.loads(json_util.dumps(data))
 
 app = Flask(__name__)
 
@@ -24,22 +37,24 @@ def Home():
 
 @app.route('/fire_hydrants')
 def get_collection():
-    collection = db['Fire_hydrants_data']
+    collection = db['fire_hydrants_data']
     documents = collection.find()
     result = []
     for document in documents:
         result.append(document)
-    return {'result': result}
+    result = parse_json(result)
+    return {'features': result}
 
 
 @app.route('/fire_incidents')
 def get_fire_incidents():
-    collection = db['Fire_hydrants_data']
+    collection = db['fire_incidents_data']
     documents = collection.find()
     result = []
     for document in documents:
         result.append(document)
-    return {'result': result}
+    result = parse_json(result)
+    return {'features': result}
 
 
 @app.route('/fire_station_location')
@@ -49,17 +64,20 @@ def get_fire_station_location():
     result = []
     for document in documents:
         result.append(document)
-    return {'result': result}
+    result = parse_json(result)
+    return {'features': result}
+
 
 
 @app.route('/toronto_wards')
 def get_neighbourhoods():
-    collection = db['Toronto_ward']
+    collection = db['toronto_ward']
     documents = collection.find()
     result = []
     for document in documents:
         result.append(document)
-    return {'result': result}
+    result = parse_json(result)
+    return {'features': result}
 
     
 if __name__ == "__main__":
