@@ -43,7 +43,7 @@ def get_collection():
     for document in documents:
         result.append(document)
     result = parse_json(result)
-    return {'result': result}
+    return {'features': result}
 
 
 @app.route('/fire_incidents')
@@ -54,7 +54,7 @@ def get_fire_incidents():
     for document in documents:
         result.append(document)
     result = parse_json(result)
-    return {'result': result}
+    return {'features': result}
 
 
 @app.route('/fire_station_location')
@@ -65,7 +65,7 @@ def get_fire_station_location():
     for document in documents:
         result.append(document)
     result = parse_json(result)
-    return {'result': result}
+    return {'features': result}
 
 
 
@@ -77,7 +77,7 @@ def get_neighbourhoods():
     for document in documents:
         result.append(document)
     result = parse_json(result)
-    return {'result': result}
+    return {'features': result}
 
     
 if __name__ == "__main__":
