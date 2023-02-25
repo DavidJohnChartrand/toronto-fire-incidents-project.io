@@ -48,9 +48,17 @@ d3.json(fireData).then(function (incidents_data) {
 // Load the GeoJSON data.
 var fireData = "static/data/Fire_Incidents_Data.geojson";
 
+// Load URL
+var fireIncidentUrl = "http://127.0.0.1:5000/fire_incidents"
+
+d3.json(fireIncidentUrl).then(function (incidents_data) {
+  console.log(incidents_data.result)
+});
+
 d3.json(fireData).then(function (incidents_data) {
-
-
+  console.log(incidents_data);
+  // let incidents_data = fires.result;
+  // console.log(incidents_data);
   incidents_data.features.forEach((feat, idx, arr)=>{
 
       var lat = feat.geometry.coordinates[1]

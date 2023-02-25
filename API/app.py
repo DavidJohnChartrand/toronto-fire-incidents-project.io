@@ -1,5 +1,9 @@
-from flask import Flask
+from flask import Flask,jsonify, json
 from pymongo import MongoClient
+from bson import json_util
+
+def parse_json(data):
+    return json.loads(json_util.dumps(data))
 
 app = Flask(__name__)
 
@@ -29,16 +33,18 @@ def get_collection():
     result = []
     for document in documents:
         result.append(document)
+    result = parse_json(result)
     return {'result': result}
 
 
 @app.route('/fire_incidents')
 def get_fire_incidents():
-    collection = db['Fire_hydrants_data']
+    collection = db['fire_incidents_data']
     documents = collection.find()
     result = []
     for document in documents:
         result.append(document)
+    result = parse_json(result)
     return {'result': result}
 
 
@@ -63,4 +69,4 @@ def get_neighbourhoods():
 
     
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
