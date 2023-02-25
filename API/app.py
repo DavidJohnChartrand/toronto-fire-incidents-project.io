@@ -2,6 +2,15 @@ from flask import Flask,jsonify, json
 from pymongo import MongoClient
 from bson import json_util
 
+# The following code is run in the command line to convert GeoJSON to a format that is readable for MongoDB
+
+#Download jq (it's sed-like program but for JSON)
+# Then run:
+# jq --compact-output ".features" input.geojson > output.geojson
+# then
+# mongoimport --db dbname -c collectionname --file "output.geojson" --jsonArray
+
+
 def parse_json(data):
     return json.loads(json_util.dumps(data))
 
@@ -28,7 +37,7 @@ def Home():
 
 @app.route('/fire_hydrants')
 def get_collection():
-    collection = db['Fire_hydrants_data']
+    collection = db['fire_hydrants_data']
     documents = collection.find()
     result = []
     for document in documents:
@@ -55,16 +64,19 @@ def get_fire_station_location():
     result = []
     for document in documents:
         result.append(document)
+    result = parse_json(result)
     return {'result': result}
+
 
 
 @app.route('/toronto_wards')
 def get_neighbourhoods():
-    collection = db['Toronto_ward']
+    collection = db['toronto_ward']
     documents = collection.find()
     result = []
     for document in documents:
         result.append(document)
+    result = parse_json(result)
     return {'result': result}
 
     
