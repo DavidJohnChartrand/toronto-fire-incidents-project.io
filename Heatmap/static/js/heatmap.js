@@ -9,8 +9,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
 
-// Load the GeoJSON data.
-var fireData = "static/data/Fire_Incidents_Data.geojson";
+// // Load the GeoJSON data.
+// var fireData = "static/data/Fire_Incidents_Data.geojson";
 
 
 //Read the GeoJSON data. and console log the first element of each array to verify the data is being read correctly
@@ -39,16 +39,6 @@ function CreateHeatMap(incidents_data){
     blur: 35
   }).addTo(myMap);
 }
-
-
-// d3.json(fireIncidentUrl).then(function (incidents_data) {
-//   CreateHeatMap(incidents_data)
-// });
-
-
-
-// Load the GeoJSON data.
-var fireData = "static/data/Fire_Incidents_Data.geojson";
 
 // Load URL
 var fireIncidentUrl = "http://127.0.0.1:5000/fire_incidents"
