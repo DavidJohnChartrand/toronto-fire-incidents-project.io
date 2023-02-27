@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Toronto Population Density</title>
+
+    <!-- Leaflet JavaScript code -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+    
+    <!-- MomentJS -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+
+    <!-- D3 library -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+<!-- polyfill.io is the library for using newer JavaScript features (such as Object.assign) in older browers. -->
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin=""/>
+
+ 
+
+<!-- input leaflet javascript code for drawing polygons-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+    <!-- input leaflet css code for drawing polygons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+    
+    <!-- Plotly script-->
+    <script src="https://cdn.plot.ly/plotly-2.18.2.js"></script>
+
+    <!-- leaflet-choropleth JavaScript -->
+    <script type="text/javascript" src="static/js/choropleth.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"></script>
+
+<!-- Marker cluster JavaScript code -->
+<script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
+  
+<script src="static/js/leaflet.extra-markers.min.js"></script>
+    <!-- Our CSS -->
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/leaflet.extra-markers.min.css">
+    <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="static/css/leaflet.extra-markers.min.css">
+
+  </head>
+  <body>
+    <header>
+      <img src="https://upload.wikimedia.org/wikipedia/en/0/03/Toronto_Fire_Services_Logo.svg" alt="Toronto Fire Logo"/>
+        <nav>
+          <ul>
+            <li><a href="../Heatmap/index.html">Toronto Fire Heatmap</a></li>
+            <li><a href="../Dollar Damage Choropleth - Total/Choropleth_dollarDamage.html">Dollar Damage Choropleth - Total</a></li>
+            <li><a href="../Dollar Damage Choropleth - Average/Choropleth_averageDamage.html">Dollar Damage Choropleth - Average</a></li>
+            <li><a href="../Extinguishing Time Choropleth/Extinguishing_Time.html">Extinguishing Time Choropleth</a></li>
+            <li><a href="../Population Density Choropleth/Population Density.html">Toronto Population Density</a></li>
+          </ul>
+        </nav>
+    </header>
+
+    <h1 class="title">Population Density Choropleth</h1>
+    <!-- The div where we'll insert our map -->
+    <div id="map"></div>
+    <!-- This is the polygon algorithm script-->
+    <script src="https://cdn.rawgit.com/hayeswise/Leaflet.PointInPolygon/v1.0.0/wise-leaflet-pip.js"></script>
+
+    <!-- Our JavaScript -->
+    <script type="text/javascript" src="static/js/Population Density.js"></script>
+
+  </body>
+</html>

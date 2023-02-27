@@ -46,3 +46,54 @@ html {
 h1 {
   text-align: center;
 }
+
+header img {
+  height:100px;
+  /* margin-left: 30px; */
+}
+
+body {
+  background-color: #192841;
+  font-family: sans-serif;
+  margin-top: 0px;
+  padding: 30px;
+}
+
+main {
+  color: white;
+}
+
+.title {
+  color: white;
+  text-align: center;
+}
+
+header {
+  background-color: 192841;
+  /* position:fixed; */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+header * {
+  display: inline;
+}
+
+header li {
+  margin:20px;
+}
+
+header li a {
+  color: white;
+  text-decoration: none;
+}
+
+div {
+  /* top: 80px; */
+  border-radius: 25px;
+  max-height: 950px;
+}

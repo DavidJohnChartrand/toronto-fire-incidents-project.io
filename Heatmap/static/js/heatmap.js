@@ -1,7 +1,7 @@
 // Creating the map object
 var myMap = L.map("map", {
   center: [43.6532, -79.3832],
-  zoom: 12
+  zoom: 11
 });
 
 // Adding the tile layer
@@ -10,7 +10,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(myMap);
 
 // // Load the GeoJSON data.
-// var fireData = "static/data/Fire_Incidents_Data.geojson";
+var fireData = "static/data/Fire_Incidents_Data.geojson";
 
 
 //Read the GeoJSON data. and console log the first element of each array to verify the data is being read correctly
@@ -75,13 +75,19 @@ var timelineLayer = L.timeline(events, {
       };
   },
   pointToLayer: function (event, latlng) {
-    return L.circleMarker(latlng, null);
+    return L.circleMarker(latlng, null).bindPopup(`<h3>${event.properties.Intersection}</h3> <hr>
+      <h3>Time Under Control: ${event.properties.Fire_Under_Control_Time}<h3/>
+      <h3>Ignition Source: ${event.properties.Ignition_Source}<h3/>
+      <h3>Estimated Dollar Damage: ${event.properties.Estimated_Dollar_Loss}<h3/>`
+      );
    }
 });
 
 timelineLayer.addTo(myMap);
 timelineControl.addTo(myMap);
 timelineControl.addTimelines(timelineLayer);
+
+console.log("hello");
 }
 
 // d3.json(fireData).then(function (incidents_data) {
@@ -95,6 +101,6 @@ addDays = (date, days) => {
 }
 
 d3.json(fireIncidentUrl).then(function (incidents_data) {
-  console.log(incidents_data.features)
-  CreateTimeLine(incidents_data)
+  console.log(incidents_data.features);
+  CreateTimeLine(incidents_data);
 });
