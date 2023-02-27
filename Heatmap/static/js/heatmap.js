@@ -1,7 +1,7 @@
 // Creating the map object
 var myMap = L.map("map", {
   center: [43.6532, -79.3832],
-  zoom: 12
+  zoom: 11
 });
 
 // Adding the tile layer
@@ -9,7 +9,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
 
-// Load the GeoJSON data.
+// // Load the GeoJSON data.
 var fireData = "static/data/Fire_Incidents_Data.geojson";
 
 
@@ -39,16 +39,6 @@ function CreateHeatMap(incidents_data){
     blur: 35
   }).addTo(myMap);
 }
-
-
-// d3.json(fireIncidentUrl).then(function (incidents_data) {
-//   CreateHeatMap(incidents_data)
-// });
-
-
-
-// Load the GeoJSON data.
-var fireData = "static/data/Fire_Incidents_Data.geojson";
 
 // Load URL
 var fireIncidentUrl = "http://127.0.0.1:5000/fire_incidents"
@@ -85,13 +75,19 @@ var timelineLayer = L.timeline(events, {
       };
   },
   pointToLayer: function (event, latlng) {
-    return L.circleMarker(latlng, null);
+    return L.circleMarker(latlng, null).bindPopup(`<h3>${event.properties.Intersection}</h3> <hr>
+      <h3>Time Under Control: ${event.properties.Fire_Under_Control_Time}<h3/>
+      <h3>Ignition Source: ${event.properties.Ignition_Source}<h3/>
+      <h3>Estimated Dollar Damage: ${event.properties.Estimated_Dollar_Loss}<h3/>`
+      );
    }
 });
 
 timelineLayer.addTo(myMap);
 timelineControl.addTo(myMap);
 timelineControl.addTimelines(timelineLayer);
+
+console.log("hello");
 }
 
 // d3.json(fireData).then(function (incidents_data) {
@@ -105,6 +101,6 @@ addDays = (date, days) => {
 }
 
 d3.json(fireIncidentUrl).then(function (incidents_data) {
-  console.log(incidents_data.features)
-  CreateTimeLine(incidents_data)
+  console.log(incidents_data.features);
+  CreateTimeLine(incidents_data);
 });
