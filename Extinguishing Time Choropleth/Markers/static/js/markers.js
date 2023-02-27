@@ -61,8 +61,8 @@
   info.addTo(myMap);
   
   // Read the GeoJSON data and add markers to the map
-  var stationData = "static/data/fire-station-locations.geojson";
-  var hydrantData = "static/data/Fire Hydrants Data.geojson";
+  var stationData = "http://127.0.0.1:5000/fire_station_location";
+  var hydrantData = "http://127.0.0.1:5000/fire_hydrants";
   
   d3.json(stationData).then(function(fireStations) {
     // Loop through the data and add markers to the marker cluster group

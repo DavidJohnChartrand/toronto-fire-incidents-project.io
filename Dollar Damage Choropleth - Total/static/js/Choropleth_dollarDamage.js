@@ -21,9 +21,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 
 // Load the GeoJSON data.
-var fireData = "static/data/Fire_Incidents_Data.geojson";
+var fireData = "http://127.0.0.1:5000/fire_incidents";
 
-var wardData = "static/data/icitw_wgs84.json";
+var wardData = "http://127.0.0.1:5000/toronto_wards";
 
 //Read the GeoJSON data. and console log the first element of each array to verify the data is being read correctly
 d3.json(fireData).then(function(incidents_data) {
