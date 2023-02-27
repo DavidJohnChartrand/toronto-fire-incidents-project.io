@@ -59,7 +59,7 @@ def get_fire_incidents():
 
 @app.route('/fire_station_location')
 def get_fire_station_location():
-    collection = db['fire_station_location']
+    collection = db['fire_station_locations']
     documents = collection.find()
     result = []
     for document in documents:
