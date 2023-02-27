@@ -31,4 +31,4 @@ We created a MongoDB database to store the GeoJSON data keeping mostly in it ori
 The ward data was modified with the addition of the population density of each ward allowing us to determine if the was a correlation between the dollar damage in each ward and the population density. 
 
 ## Authors
-This data has been collected, aggregated, and visualised by Youssouf Ismael Youssouf, and David Chartrand.
+This data has been collected, aggregated, and visualised by Natalia Ebralidze, Eric Liu, Youssouf Ismael Youssouf, and David Chartrand.
